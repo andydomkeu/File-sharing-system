@@ -50,3 +50,6 @@ When an `UPLOAD` or `DOWNLOAD` occurs, the user interface will need to refresh b
   - How to run: step-by-step information on how one can successfully clone and run your application.
 
   - Other resources: any references to other materials/libraries that you might have used on your solution.
+
+ > Feel free to create other helper classes as you see fit.
+ 
