@@ -7,6 +7,7 @@
     <groupId>csci2020u.assignment02</groupId>
     <artifactId>assignment02</artifactId>
     <version>1.0</version>
+    <packaging>pom</packaging>
     <name>File Sharer</name>
 
     <properties>
