@@ -103,6 +103,12 @@ public class ClientUI extends JFrame {
         });
 
         refreshFileLists();
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                confirmExit();
+            }
+        });
 
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
