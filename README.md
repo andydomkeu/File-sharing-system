@@ -32,7 +32,8 @@ This implementation of a file sharing system in Java allows users to upload and 
   - UI aesthetics and usability: modified color schemes, made it more user friendly by adding instructions for use at the bottom and specifying which side is client and server
   - Duplicate Handling: if user tries to perform an upload/download operation on a file that already exists, user is shown an error message and operation is cancelled
   - Selecting a file on one side automatically clears selection on other side to prevent confusion 
-  - File Preview panel: scrollable text area at the bottom where user can preview files 
+  - File Preview panel: scrollable text area at the bottom where user can preview files
+  - Hover over upload and download buttons for instructions
 
 ## How to Run
 1. Clone the repository
