@@ -29,8 +29,11 @@ public class ClientUI extends JFrame {
         buttonPanel.add(uploadBtn);
         buttonPanel.add(downloadBtn);
 
+        // add menu bar and its items
+        setupMenu();
+
         //Set left side as client and right as server
-        add(buttonPanel, BorderLayout.NORTH);
+        add(buttonPanel, BorderLayout.SOUTH);
         add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(localList), new JScrollPane(serverList)), BorderLayout.CENTER);
 
         //Event handlers - upload and download
@@ -51,6 +54,24 @@ public class ClientUI extends JFrame {
         setVisible(true);
     }
 
+    // setup the menu bar and all its items
+    private void setupMenu(){
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("File");
+        JMenuItem uploadItem = new JMenuItem("Upload");
+        JMenuItem downloadItem = new JMenuItem("Download");
+        JMenuItem exitItem = new JMenuItem("Exit");
+        menu.add(uploadItem);
+        menu.add(downloadItem);
+        menu.add(exitItem);
+        menuBar.add(menu);
+        add(menuBar, BorderLayout.NORTH);
+
+        // add listeners the menu items
+        exitItem.addActionListener(e -> confirmExit());
+        uploadItem.addActionListener(e -> upload());
+        downloadItem.addActionListener(e -> download());
+    }
 
     // confirms the exit of the window
     private void confirmExit() {
@@ -120,10 +141,10 @@ public class ClientUI extends JFrame {
         UIManager.put("MenuBar.font", new Font("Arial", Font.BOLD, 14));
         UIManager.put("Menu.background", Color.decode("#E3F2FD"));
         UIManager.put("Menu.foreground", Color.decode("#1E3A5F"));
-        UIManager.put("Menu.font", new Font("Arial", Font.PLAIN, 12));
+        UIManager.put("Menu.font", new Font("Arial", Font.PLAIN, 14));
         UIManager.put("MenuItem.background", Color.decode("#E3F2FD"));
         UIManager.put("MenuItem.foreground", Color.decode("#1E3A5F"));
-        UIManager.put("MenuItem.font", new Font("Arial", Font.PLAIN, 12));
+        UIManager.put("MenuItem.font", new Font("Arial", Font.PLAIN, 14));
         UIManager.put("MenuItem.selectionBackground", Color.decode("#1E3A5F"));
         UIManager.put("MenuItem.selectionForeground", Color.WHITE);
 
