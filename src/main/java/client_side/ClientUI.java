@@ -70,40 +70,43 @@ public class ClientUI extends JFrame {
     private void setInterfaceStyle() {
         UIManager.put("Panel.background", Color.decode("#E3F2FD"));
 
+        // button
         UIManager.put("Button.font", new Font("Arial", Font.BOLD, 14));
         UIManager.put("Button.background", Color.WHITE);
         UIManager.put("Button.foreground", Color.decode("#1E3A5F"));
         UIManager.put("Button.border", BorderFactory.createLineBorder(Color.decode("#1E3A5F"), 2));
 
+        // background
         UIManager.put("OptionPane.background", Color.decode("#E3F2FD"));
         UIManager.put("OptionPane.messageForeground", Color.decode("#1E3A5F"));
 
+        // text field background
         UIManager.put("TextField.background", Color.WHITE);
         UIManager.put("TextField.foreground", Color.decode("#1E3A5F"));
         UIManager.put("TextField.font", new Font("Arial", Font.PLAIN, 14));
         UIManager.put("TextField.border", BorderFactory.createLineBorder(Color.decode("#1E3A5F"), 1));
 
-        UIManager.put("TextArea.background", Color.WHITE);
-        UIManager.put("TextArea.foreground", Color.decode("#1E3A5F"));
-        UIManager.put("TextArea.font", new Font("Arial", Font.PLAIN, 14));
-        UIManager.put("TextArea.border", BorderFactory.createLineBorder(Color.decode("#1E3A5F"), 1));
-
+        // labels
         UIManager.put("Label.background", Color.decode("#E3F2FD"));
         UIManager.put("Label.foreground", Color.decode("#1E3A5F"));
         UIManager.put("Label.font", new Font("Arial", Font.BOLD, 14));
 
+        // lists
         UIManager.put("List.selectionBackground", Color.decode("#1E3A5F"));
         UIManager.put("List.selectionForeground", Color.WHITE);
         UIManager.put("List.font", new Font("Arial", Font.PLAIN, 12));
 
+        // scroll panesj
         UIManager.put("ScrollPane.background", Color.decode("#E3F2FD"));
         UIManager.put("ScrollPane.border", BorderFactory.createLineBorder(Color.decode("#1E3A5F"), 1));
 
+        // scroll bars
         UIManager.put("ScrollBar.background", Color.decode("#E3F2FD"));
         UIManager.put("ScrollBar.foreground", Color.decode("#1E3A5F"));
         UIManager.put("ScrollBar.thumb", Color.decode("#1E3A5F"));
         UIManager.put("ScrollBar.track", Color.decode("#E3F2FD"));
 
+        // tabels
         UIManager.put("Table.background", Color.WHITE);
         UIManager.put("Table.foreground", Color.decode("#1E3A5F"));
         UIManager.put("Table.font", new Font("Arial", Font.PLAIN, 12));
@@ -111,20 +114,20 @@ public class ClientUI extends JFrame {
         UIManager.put("Table.selectionForeground", Color.WHITE);
         UIManager.put("Table.gridColor", Color.decode("#1E3A5F"));
 
+        // menu items
         UIManager.put("MenuBar.background", Color.decode("#E3F2FD"));
         UIManager.put("MenuBar.foreground", Color.decode("#1E3A5F"));
         UIManager.put("MenuBar.font", new Font("Arial", Font.BOLD, 14));
-
         UIManager.put("Menu.background", Color.decode("#E3F2FD"));
         UIManager.put("Menu.foreground", Color.decode("#1E3A5F"));
         UIManager.put("Menu.font", new Font("Arial", Font.PLAIN, 12));
-
         UIManager.put("MenuItem.background", Color.decode("#E3F2FD"));
         UIManager.put("MenuItem.foreground", Color.decode("#1E3A5F"));
         UIManager.put("MenuItem.font", new Font("Arial", Font.PLAIN, 12));
         UIManager.put("MenuItem.selectionBackground", Color.decode("#1E3A5F"));
         UIManager.put("MenuItem.selectionForeground", Color.WHITE);
 
+        // progress bar (if added)
         UIManager.put("ProgressBar.background", Color.decode("#E3F2FD"));
         UIManager.put("ProgressBar.foreground", Color.decode("#1E3A5F"));
         UIManager.put("ProgressBar.border", BorderFactory.createLineBorder(Color.decode("#1E3A5F"), 1));
