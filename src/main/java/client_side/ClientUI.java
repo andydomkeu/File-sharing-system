@@ -12,20 +12,23 @@ public class ClientUI extends JFrame {
     private JList<String> localList = new JList<>(localFiles);
     private JList<String> serverList = new JList<>(serverFiles);
     private Client client;
+    private JTextArea previewArea = new JTextArea(5, 40);
+
 
     public ClientUI(Client client) {
-        // set the style for the interface
         setInterfaceStyle();
 
-        //Set up window using BorderLayout
+        // Set up window using BorderLayout
         this.client = client;
         setTitle("File Sharer");
         setLayout(new BorderLayout());
 
-        //Add buttons for upload and download
+        // Add buttons for upload and download
         JPanel buttonPanel = new JPanel();
         JButton uploadBtn = new JButton("Upload");
         JButton downloadBtn = new JButton("Download");
+        uploadBtn.setToolTipText("Upload selected file from client (left) to server (right)");
+        downloadBtn.setToolTipText("Download selected file from server (right) to client (left)");
         buttonPanel.add(uploadBtn);
         buttonPanel.add(downloadBtn);
 
@@ -35,15 +38,67 @@ public class ClientUI extends JFrame {
         //Set left side as client and right as server
         add(buttonPanel, BorderLayout.SOUTH);
         add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(localList), new JScrollPane(serverList)), BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.NORTH);
 
-        //Event handlers - upload and download
+        // Add Client side
+        JPanel clientPanel = new JPanel(new BorderLayout());
+        clientPanel.add(new JLabel("Client (Local Files)", JLabel.CENTER), BorderLayout.NORTH);
+        clientPanel.add(new JScrollPane(localList), BorderLayout.CENTER);
+
+        // Add Server side
+        JPanel serverPanel = new JPanel(new BorderLayout());
+        serverPanel.add(new JLabel("Server (Remote Files)", JLabel.CENTER), BorderLayout.NORTH);
+        serverPanel.add(new JScrollPane(serverList), BorderLayout.CENTER);
+
+        // Combine into a split pane
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, clientPanel, serverPanel);
+        add(splitPane, BorderLayout.CENTER);
+
+        // File preview area
+        previewArea = new JTextArea(5, 40);
+        previewArea.setEditable(false);
+        previewArea.setLineWrap(true);
+        previewArea.setWrapStyleWord(true);
+        previewArea.setBorder(BorderFactory.createTitledBorder("File Preview"));
+
+        //Set instructions for usage
+        JLabel instructions = new JLabel("⬅ Select a file on the left and click Upload | Select a file on the right and click Download ➡", JLabel.CENTER);
+
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.add(new JScrollPane(previewArea), BorderLayout.CENTER);
+        bottomPanel.add(instructions, BorderLayout.SOUTH);
+        add(bottomPanel, BorderLayout.SOUTH);
+
+        // Upload download action listeners
         uploadBtn.addActionListener(e -> upload());
         downloadBtn.addActionListener(e -> download());
-        // exit window listener
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                confirmExit();
+
+
+        // File selection preview listener, clear once new file is selected - local list
+        localList.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                serverList.clearSelection();
+                String filename = localList.getSelectedValue();
+                if (filename != null) {
+                    File file = new File(Resources.CLIENT_SHARED_FOLDER + "/" + filename);
+                    previewArea.setText(readFileContents(file));
+                } else {
+                    previewArea.setText("");
+                }
+            }
+        });
+
+        // File selection preview listener, clear once new file is selected - server list
+        serverList.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                localList.clearSelection();
+                String filename = serverList.getSelectedValue();
+                if (filename != null) {
+                    String content = client.downloadFile(filename); // preview only
+                    previewArea.setText(content);
+                } else {
+                    previewArea.setText("");
+                }
             }
         });
 
@@ -220,6 +275,19 @@ public class ClientUI extends JFrame {
             refreshFileLists();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private String readFileContents(File file) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            StringBuilder content = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+            return content.toString();
+        } catch (IOException e) {
+            return "Unable to read file: " + file.getName();
         }
     }
 
