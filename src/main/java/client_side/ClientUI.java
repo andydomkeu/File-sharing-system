@@ -38,7 +38,6 @@ public class ClientUI extends JFrame {
         //Set left side as client and right as server
         add(buttonPanel, BorderLayout.SOUTH);
         add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(localList), new JScrollPane(serverList)), BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.NORTH);
 
         // Add Client side
         JPanel clientPanel = new JPanel(new BorderLayout());
@@ -65,9 +64,10 @@ public class ClientUI extends JFrame {
         JLabel instructions = new JLabel("⬅ Select a file on the left and click Upload | Select a file on the right and click Download ➡", JLabel.CENTER);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(new JScrollPane(previewArea), BorderLayout.CENTER);
+        bottomPanel.add(new JScrollPane(previewArea), BorderLayout.NORTH);
         bottomPanel.add(instructions, BorderLayout.SOUTH);
         add(bottomPanel, BorderLayout.SOUTH);
+        bottomPanel.add(buttonPanel, BorderLayout.CENTER);
 
         // Upload download action listeners
         uploadBtn.addActionListener(e -> upload());
